@@ -16,9 +16,10 @@ const OMDB_KEY = process.env.OMDB_KEY;
 // Example endpoint: Get random horror movie with IMDb filters
 app.get("/random", async (req, res) => {
   try {
-    const minimumRating = parseFloat(req.query.minimumRating) || 7;
-    const genre = req.query.genre.toLowerCase() || "horror";
-    const genreId = genresData.genres.find(g => g.name.toLowerCase() === genre)?.id || 27;
+    const minimumRating = req.query.minimumRating ? parseFloat(req.query.minimumRating) : 0;
+    const genre = req.query.genre ? req.query.genre.toLowerCase() : '';
+    console.log('genreeeeeee', genre);
+    const genreId = genresData.genres.find(g => g.name.toLowerCase() === genre)?.id || '';
     console.log('genreId', genreId);
     
     // 1. Discover horror movies from TMDb
